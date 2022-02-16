@@ -13,7 +13,6 @@ const Home = () => {
         <Link to="profile"> 소개 </Link>
         <p>가장 먼저 보여지는 페이지입니다.</p>
         <Nftcard></Nftcard>
-        <Users></Users>
     </div>
 
     
