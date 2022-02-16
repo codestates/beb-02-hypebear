@@ -13,6 +13,8 @@ const client = create("https://ipfs.infura.io:5001/api/v0");
 // const contractAddr = "0x29A16Ce1C025d9acE8dDC5845235Ea4F918BE040";
 //const contractAddr = "0xbf0a2A941c308850A9Aac779B0EFc1C603c193df"
 const contractAddr = "0x29A16Ce1C025d9acE8dDC5845235Ea4F918BE040";
+// const contractAddr = "0x9E45c7Dd22B00eeC49da6e75E835e7C6EbeD97d7";
+
 
 const baseStyle = {
   flex: 1,

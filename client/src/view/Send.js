@@ -7,6 +7,8 @@ const Send = ({account, web3, connectWallet}) => {
     const [erc721list, setErc721list] = useState([]);
 
     const smartContractAddr = "0x29A16Ce1C025d9acE8dDC5845235Ea4F918BE040";
+    // const smartContractAddr = "0xbf0a2A941c308850A9Aac779B0EFc1C603c193df"
+    // const smartContractAddr = "0x9E45c7Dd22B00eeC49da6e75E835e7C6EbeD97d7";
 
     const addNewErc721Token = async () => {
         const tokenContract = await new web3.eth.Contract(
@@ -35,14 +37,13 @@ const Send = ({account, web3, connectWallet}) => {
                 let tokenURI = await tokenContract.methods
                     .tokenURI(tokenId)
                     .call();
-                
-				let metadata = await fetch(tokenURI);
-				if (!metadata.ok) throw new Error(metadata.statusText);
-				const json = await metadata.json();
-                let image = json["image"];
-                
+                let metadata = await fetch(tokenURI);
+                if (!metadata.ok) throw new Error(metadata.statusText);
+                const json = await metadata.json();
+                tokenURI = json["image"]; 
+
                 setErc721list((preState) => {
-                    return [...preState, { name, symbol, tokenId, image}];
+                    return [...preState, { name, symbol, tokenId, tokenURI}];
                 });
             }  
         }

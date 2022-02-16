@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import Button from '@mui/material/Button';
-import web3 from 'web3'
 import erc721Abi from "../HB721Abi.js";
 
 // ERC 721 부분
@@ -14,6 +13,8 @@ function SendErc721({ erc721list, account, smartContractAddr, web3 }) {
             smartContractAddr,
             {
                 from: account
+        
+	
             }
         );
         console.log(account, to, tokenId);
@@ -36,7 +37,7 @@ function SendErc721({ erc721list, account, smartContractAddr, web3 }) {
                 return (
                     <div className="send-erc721token" key={token.tokenId}>
                         <div>
-                            <img src={token.image} width={150} alt="none" />
+                            <img src={token.tokenURI} width={150} alt="none" />
                         </div>
                         <div className="send-erc721token-exp">
                             <div className="name">Name: {token.name}</div>
