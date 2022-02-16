@@ -50,7 +50,9 @@ npm ci
 npm run start
 ```
 
-![example](https://github.com/codestates/beb-02-hypebear/gif/example.gif)
+#### Process
+
+![example](https://github.com/codestates/beb-02-hypebear/blob/main/gif/output.gif)
 
 
 
