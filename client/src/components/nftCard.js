@@ -28,7 +28,10 @@ const Nftcard = () => {
           // 'https://jsonplaceholder.typicode.com/users' 
           // 'https://jsonplaceholder.typicode.com/posts'
         );
-        let data =  response["metadata"]
+        console.log(response);
+
+        let data =  response.data["metadata"]
+        console.log(data);
         setUsers(data); // 데이터는 response.data 안에 들어있습니다.
       } catch (e) {
         setError(e);
@@ -42,6 +45,7 @@ const Nftcard = () => {
   if (loading) return <div>로딩중..</div>;
   if (error) return <div>에러가 발생했습니다</div>;
   if (!users) return null;
+
   return (
     <div>
       {users.map(user => (
@@ -49,9 +53,7 @@ const Nftcard = () => {
         <CardBody >
           <div className="imgBox">
             <img
-              src={
-               user.image
-              }
+              src={user.image}
               alt="no img"
               className="nftImg"
             />
