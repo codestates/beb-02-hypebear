@@ -4,7 +4,7 @@ import Home from './view/Home';
 import Profile from './view/profile'
 import Send from './view/Send'
 import Create from './view/Create'
-
+import axios from "axios";
 import './styles/App.scss';
 import Header from './components/header'
 import Footer from './components/footer'
@@ -17,6 +17,8 @@ const App = () => {
     const [sideSize, setSideSize] = useState(false);
     const [account, setAccount] = useState('');
     const [web3, setWeb3] = useState();
+    const [searchAccount, setSearchAccount] = useState('');
+    const [cards, setCards] = useState(null);
 
     const handleResizeSide = (checked) => {
         setSideSize(checked)
@@ -46,15 +48,28 @@ const App = () => {
         console.log(accounts)
     };
     
+    const setSearch = async (value) => {
+        setSearchAccount(value);
+        if (!value) return;
+        const domain = `http://34.87.171.217/account/${value}`;
+        const response = await axios.get(domain);
+        console.log(response);
+        let data = response.data["metadata"];
+        console.log(data);
+        setCards(data);
+    }
+    
     return (
         <div className="main app"> 
             <Sidebar sideSize={sideSize} connectWallet={connectWallet} account={account}/>
             <div className="screen">
-                <Header className="head" handleResizeSide={handleResizeSide} sideSize={sideSize}/>
+                <Header className="head" handleResizeSide={handleResizeSide} sideSize={sideSize} setSearch={setSearch} />
                     <Routes>
                         <Route path="/" element={<Home
                             sideSize={sideSize}
                             setSideSize={setSideSize}
+                            searchAccount={searchAccount}
+                            cards={cards}
                         />} />
                     <Route path="/profile" element={<Profile account={account} web3={web3}/>} />
                     <Route path="/send" onClick={connectWallet} element={<Send account={account} web3={web3} connectWallet={connectWallet}/>} />

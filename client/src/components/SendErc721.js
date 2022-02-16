@@ -34,7 +34,6 @@ function SendErc721({ erc721list, account, smartContractAddr, web3 }) {
             </div>
             {erc721list.map((token) => {
                 return (
-            
                     <div className="send-erc721token" key={token.tokenId}>
                         <div>
                             <img src={token.image} width={150} alt="none" />

@@ -3,6 +3,7 @@ import erc721Abi from "../HB721Abi";
 // import ipfs from "./utils/ipfs";
 // var ipfs = create("/ip4/127.0.0.1/tcp/5003");
 // var ipfs = new create({ host: "ipfs.infura.io 22", port: 5001, protocol: "https" });
+import Axios from 'axios';
 
 import { create } from "ipfs-http-client";
 import React, {useCallback, useState, useMemo, useEffect} from 'react'
@@ -90,6 +91,7 @@ function MyDropzone( {onChange, previewFile, onDrop} ) {
 
 function Create({account, web3}) {
     const [previewFile, setPreviewFile] = useState();
+    const [fileUrl, setFileUrl] = useState();
 
 	const [userFileUrl, setUserFileUrl] = useState(``);
 	const [userFileIPFSUrl, setUserFileIPFSUrl] = useState(``);
@@ -101,25 +103,33 @@ function Create({account, web3}) {
 	async function onChange(e) {
         const file = e.target.files[0];
 		setUserFileUrl(file);
+        console.log(file.path)
 	}
 
     const onDrop = useCallback( acceptedFiles => {
-        console.log(acceptedFiles[0]);
 		// setUserFileUrl(acceptedFiles[0]);
         setPreviewFile({preview: URL.createObjectURL(acceptedFiles[0])});
-        setUserFileUrl(acceptedFiles);
+        setUserFileUrl(URL.createObjectURL(acceptedFiles[0]));
     });
 	const mint = async () => {
 		try {
-			const cid = await client.add(userFileUrl);
-            console.log("qwerqwer", cid.path);
+            console.log("test")
+            const file = await Axios
+                .get(userFileUrl, {responseType: "blob"})
+                .then(response => {
+                    return response.data;
+                });
+            
+			const cid = await client.add(file);
 			const image_url = `https://ipfs.infura.io/ipfs/${cid.path}`;
 			setUserFileIPFSUrl(image_url);
+            console.log(userFileIPFSUrl);
 		} catch (error) {
 			console.log("Error uploading file: ", error);
 		}
 
 		let metadata = { image: userFileIPFSUrl, name: userFileName, description: userFileDesc };
+        console.log(metadata);
 		let cid;
 		let metadata_url;
 		let tokenContract;
