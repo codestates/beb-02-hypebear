@@ -58,8 +58,12 @@ const Sidebar = ({sideSize, connectWallet, account }) => {
                     title="Deal"
                     icon={<FaRegLaughWink/>}
                     >
-                        <MenuItem> Send </MenuItem>
-                        <MenuItem> Create </MenuItem>
+                        <MenuItem> 
+                            <Link to="/send"> Send </Link>
+                        </MenuItem>
+                        <MenuItem>
+                            <Link to="/create"> Create </Link>
+                        </MenuItem>
                     </SubMenu>
                 </Menu>
 
