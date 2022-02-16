@@ -2,7 +2,7 @@
     box-sizing: border-box;
     padding:0!important;
     width: 24em;
-    height: 47em;
+    height: 40em;
     /* background-color: lightgray; */
     border: 1px solid #464444;
     border-radius: 2rem;
@@ -12,7 +12,7 @@
 
 .nftImg{
     width:100%;
-    height:auto;
+    height:20em;
     /* padding-bottom:1px; */
     border-radius: 2em;
     border-bottom:0.25rem dashed lightgray;

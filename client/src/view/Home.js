@@ -1,7 +1,6 @@
 import React from "react"
 import { Link } from 'react-router-dom';
 import Nftcard from "../components/nftCard";
-import Users from "../components/axios"
 
 // Home 컨탠츠 없음 
 const Home = () => {
