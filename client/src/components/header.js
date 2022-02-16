@@ -1,17 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Switch from 'react-switch';
 import { FaHeart, FaBars, FaSearch } from 'react-icons/fa';
 
 const Header = ({
     handleResizeSide,
-    sideSize
+    sideSize,
+    setSearch
 }) => {
+
+    const [Account, setAccount] = useState();
+
+    const onChange = (e) => {
+        setAccount(e.target.value);
+    }
+
+    const onKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            setSearch(Account);
+        }
+    }
+
     return (
         <div className="topNav">
             <div>
                 <form className="header-form">
                     <FaSearch />
-                    <input type="text" placeholder="Search" name="search"/>
+                    <input type="text"  placeholder="Search"  onChange={onChange} value={Account} onKeyPress={onKeyPress} />
                 </form>
             </div>
             <div className="block">
