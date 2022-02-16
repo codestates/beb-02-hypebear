@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
 import './nftCard.css'
+import Users from './axios';
   
 const Nftcard = () => {
   return (
