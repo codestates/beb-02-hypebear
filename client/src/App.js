@@ -19,6 +19,7 @@ const App = () => {
     const [web3, setWeb3] = useState();
     const [searchAccount, setSearchAccount] = useState('');
     const [cards, setCards] = useState(null);
+    const [nfts, setNfts] = useState(null); //nftcard account 설정
 
     const handleResizeSide = (checked) => {
         setSideSize(checked)
@@ -46,6 +47,15 @@ const App = () => {
         });
         setAccount(accounts[0]);
         console.log(accounts)
+
+        //연결된 지갑 nft
+        if (!accounts) return;
+        const nftDomain = `http://34.87.171.217/account/${accounts}`;
+        const nftResponse = await axios.get(nftDomain);
+        console.log(nftResponse);
+        let nftData = nftResponse.data["metadata"];
+        console.log(nftData);
+        setNfts(nftData);
     };
     
     const setSearch = async (value) => {
@@ -58,6 +68,10 @@ const App = () => {
         console.log(data);
         setCards(data);
     }
+
+    
+    
+
     
     return (
         <div className="main app"> 
@@ -71,7 +85,7 @@ const App = () => {
                             searchAccount={searchAccount}
                             cards={cards}
                         />} />
-                    <Route path="/profile" element={<Profile account={account} web3={web3}/>} />
+                    <Route path="/profile" element={<Profile nfts={nfts} account={account} web3={web3}/>} />
                     <Route path="/send" onClick={connectWallet} element={<Send account={account} web3={web3} connectWallet={connectWallet}/>} />
                     <Route path="/create" element={<Create account={account} web3={web3} />} />
                 </Routes>
